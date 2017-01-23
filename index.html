@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <meta charset="utf-8">
+  <title>MDN PARTY</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+<META NAME="robots" CONTENT="noindex,nofollow">
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<script type="text/javascript" src="./lib/jquery.min.js"></script>
+<script type="text/javascript" src="./dist/jplayer/jquery.jplayer.min.js"></script>
+<script type="text/javascript">
+//<![CDATA[
+
+	// Local copy of jQuery selectors, for performance.
+$(document).ready(function(){
+
+	var	my_jPlayer = $("#jquery_jplayer"),
+		my_trackName = $("#jp_container .track-name"),
+		my_playState = $("#jp_container .play-state"),
+		my_extraPlayInfo = $("#jp_container .extra-play-info");
+
+	// Some options
+	var	opt_play_first = false, // If true, will attempt to auto-play the default track on page loads. No effect on mobile devices, like iOS.
+		opt_auto_play = true, // If true, when a track is selected, it will auto-play.
+		opt_text_playing = "Now playing", // Text when playing
+		opt_text_selected = "Track selected"; // Text when not playing
+
+	// A flag to capture the first track
+	var first_track = true;
+
+	// Change the time format
+	$.jPlayer.timeFormat.padMin = false;
+	$.jPlayer.timeFormat.padSec = false;
+	$.jPlayer.timeFormat.sepMin = " min ";
+	$.jPlayer.timeFormat.sepSec = " sec";
+
+	// Initialize the play state text
+	my_playState.text(opt_text_selected);
+
+	// Instance jPlayer
+	my_jPlayer.jPlayer({
+		ready: function () {
+			$("#jp_container .track-default").click();
+		},
+		timeupdate: function(event) {
+			my_extraPlayInfo.text(parseInt(event.jPlayer.status.currentPercentAbsolute, 10) + "%");
+		},
+		play: function(event) {
+			my_playState.text(opt_text_playing);
+		},
+		pause: function(event) {
+			my_playState.text(opt_text_selected);
+		},
+		ended: function(event) {
+			my_playState.text(opt_text_selected);
+		},
+		swfPath: "./dist/jplayer",
+		cssSelectorAncestor: "#jp_container",
+		supplied: "mp3",
+		wmode: "window"
+	});
+
+	// Create click handlers for the different tracks
+	$("#jp_container .track").click(function(e) {
+		my_trackName.text($(this).text());
+		my_jPlayer.jPlayer("setMedia", {
+			mp3: $(this).attr("href")
+		});
+		if((opt_play_first && first_track) || (opt_auto_play && !first_track)) {
+			my_jPlayer.jPlayer("play");
+		}
+		first_track = false;
+		$(this).blur();
+		return false;
+	});
+
+});
+//]]>
+</script>
+
+<style>
+<!--
+
+.mdn-container {
+	border: 2px solid #FFC300;
+	padding:0 20px;
+	font-family: "Myriad Pro Regular","Trebuchet MS";
+}
+
+.mdn-container a, .mdn-container a:link, .mdn-container a:visited, .mdn-container a:hover, .mdn-container a:focus, .mdn-container a:active {
+	color: #009BE3;
+}
+
+.mdn-container ul {
+	list-style-type:none;
+	padding:0;
+	margin:1em 0;
+	width:100%;
+	overflow:hidden;
+}
+
+.mdn-container ul span {
+	color: #A0A600;
+}
+
+.mdn-container li {
+	float:left;
+	margin-right:1em;
+}
+
+.mdn-container p span.track-name {
+	color: #FFC300;
+}
+
+-->
+</style>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+</head>
+<body>
+
+<div id="jquery_jplayer"></div>
+
+		<div id="jp_container" class="mdn-container">
+			 <table align="left center">
+  <tr>
+	<td><a href="http://www.jplayer.org/audio/mp3/TSP-01-Cro_magnon_man.mp3" class="track track-default">Cro Magnon Man</a></td>
+    <td><a href="http://www.jplayer.org/audio/mp3/Miaow-05-The-separation.mp3" class="track">The Separation</a></td>
+    <td><a href="http://www.jplayer.org/audio/mp3/Miaow-04-Lismore.mp3" class="track">Lismore</a></td>
+    <td><a href="http://www.jplayer.org/audio/mp3/Miaow-10-Thin-ice.mp3" class="track">Thin Ice</a></td>
+  </tr>
+</table>
+			<p>
+				<span class="play-state"></span> :
+				<span class="track-name">nothing</span>
+			</p>
+			<ul>
+				<li><a class="jp-play" href="#">Play</a></li>
+				<li><a class="jp-pause" href="#">Pause</a></li>
+				<li><a class="jp-stop" href="#">Stop</a></li>
+			</ul>
+		</div>
+	<div class="">
+Welcome to the beta test of mdn party. using jplayer. works in most android browsers.
+</div>
+
+</body>
+</html>
+es/favicon.png">
+
+</head>
+<body>
+
+<div id="jquery_jplayer"></div>
+
+		<div id="jp_container" class="mdn-container">
+			 <table align="left center">
+  <tr>
+	<td><a href="http://www.jplayer.org/audio/mp3/TSP-01-Cro_magnon_man.mp3" class="track track-default">Cro Magnon Man</a></td>
+    <td><a href="http://www.jplayer.org/audio/mp3/Miaow-05-The-separation.mp3" class="track">The Separation</a></td>
+    <td><a href="http://www.jplayer.org/audio/mp3/Miaow-04-Lismore.mp3" class="track">Lismore</a></td>
+    <td><a href="http://www.jplayer.org/audio/mp3/Miaow-10-Thin-ice.mp3" class="track">Thin Ice</a></td>
+  </tr>
+</table>
+			<p>
+				<span class="play-state"></span> :
+				<span class="track-name">nothing</span>
+			</p>
+			<ul>
+				<li><a class="jp-play" href="#">Play</a></li>
+				<l
